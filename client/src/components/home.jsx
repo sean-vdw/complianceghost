@@ -1,12 +1,42 @@
 import { Fragment, useState } from 'react'
 import { FaceSmileIcon as FaceSmileIconOutline, PaperClipIcon } from '@heroicons/react/24/outline'
-import { Listbox, Transition } from '@headlessui/react'
+import axios from 'axios';
+
+const { GoogleGenerativeAI } = require("@google/generative-ai");
+
+// Access your API key as an environment variable (see "Set up your API key" above)
+const genAI = new GoogleGenerativeAI(process.env.REACT_APP_API_KEY);
+
+// For text-only input, use the gemini-pro model
+const model = genAI.getGenerativeModel({ model: "gemini-pro-vision" });
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(' ')
 }
 
 export default function Home() {
+  const [userMessage, setUserMessage] = useState('');
+
+  const sendMessage = async () => {
+    axios.post('#', { message: userMessage }, {
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    })
+      .then(response => {
+        if (response) {
+          console.log('Response received');
+          if (response.data) {
+            console.log(response.data);
+          } else {
+            console.log('No data in response');
+          }
+        }
+      })
+      .catch(error => {
+        console.error(error);
+      });
+  }
 
   return (
     <div className="flex items-start space-x-4">
@@ -21,15 +51,16 @@ export default function Home() {
         <form action="#">
           <div className="border-b border-gray-200 focus-within:border-teal-600">
             <label htmlFor="comment" className="sr-only">
-              Add your comment
+              Add the URL or paste the content you would like to analyze...
             </label>
             <textarea
               rows={3}
               name="comment"
               id="comment"
               className="block w-full resize-none border-0 border-b border-transparent p-0 pb-2 text-gray-900 placeholder:text-gray-400 focus:border-teal-600 focus:ring-0 sm:text-sm sm:leading-6"
-              placeholder="Add your comment..."
-              defaultValue={''}
+              placeholder="Add the URL or paste the content you would like to analyze..."
+              value={userMessage}
+              onChange={(e) => setUserMessage(e.target.value)}
             />
           </div>
           <div className="flex justify-between pt-2">
@@ -43,46 +74,14 @@ export default function Home() {
                   <span className="sr-only">Attach a file</span>
                 </button>
               </div>
-              <div className="flow-root">
-                <Listbox value={selected} onChange={setSelected}>
-                  {({ open }) => (
-                    <>
-                      <Listbox.Label className="sr-only">Your mood</Listbox.Label>
-                      <div className="relative">
-                        <Listbox.Button className="relative -m-2 inline-flex h-10 w-10 items-center justify-center rounded-full text-gray-400 hover:text-gray-500">
-                          <span className="flex items-center justify-center">
-                            {selected.value === null ? (
-                              <span>
-                                <FaceSmileIconOutline className="h-6 w-6 flex-shrink-0" aria-hidden="true" />
-                                <span className="sr-only">Add your mood</span>
-                              </span>
-                            ) : (
-                              <span>
-                                <span
-                                  className={classNames(
-                                    selected.bgColor,
-                                    'flex h-8 w-8 items-center justify-center rounded-full'
-                                  )}
-                                >
-                                  <selected.icon className="h-5 w-5 flex-shrink-0 text-white" aria-hidden="true" />
-                                </span>
-                                <span className="sr-only">{selected.name}</span>
-                              </span>
-                            )}
-                          </span>
-                        </Listbox.Button>
-                      </div>
-                    </>
-                  )}
-                </Listbox>
-              </div>
             </div>
             <div className="flex-shrink-0">
               <button
                 type="submit"
+                onClick={sendMessage}
                 className="inline-flex items-center rounded-md bg-teal-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-teal-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-teal-600"
               >
-                Post
+                Submit
               </button>
             </div>
           </div>
