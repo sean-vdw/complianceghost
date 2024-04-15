@@ -4,49 +4,25 @@ import axios from 'axios';
 
 const { GoogleGenerativeAI } = require("@google/generative-ai");
 
-// Access your API key as an environment variable (see "Set up your API key" above)
 const genAI = new GoogleGenerativeAI(process.env.REACT_APP_API_KEY);
 
-// For text-only input, use the gemini-pro model
-const model = genAI.getGenerativeModel({ model: "gemini-pro-vision" });
-
-function classNames(...classes) {
-  return classes.filter(Boolean).join(' ')
-}
 
 export default function Home() {
   const [userMessage, setUserMessage] = useState('');
 
   const sendMessage = async () => {
-    axios.post('#', { message: userMessage }, {
-      headers: {
-        'Content-Type': 'application/json',
-      },
-    })
-      .then(response => {
-        if (response) {
-          console.log('Response received');
-          if (response.data) {
-            console.log(response.data);
-          } else {
-            console.log('No data in response');
-          }
-        }
-      })
-      .catch(error => {
-        console.error(error);
-      });
+    const model = genAI.getGenerativeModel({ model: "gemini-pro" });
+    const prompt = {userMessage};
+
+    const result = await model.generateContent(prompt);
+    const response = await result.response;
+    const text = response.text();
+
+    console.log(text);
   }
 
   return (
     <div className="flex items-start space-x-4">
-      <div className="flex-shrink-0">
-        <img
-          className="inline-block h-10 w-10 rounded-full"
-          src="https://images.unsplash.com/photo-1550525811-e5869dd03032?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
-          alt=""
-        />
-      </div>
       <div className="min-w-0 flex-1">
         <form action="#">
           <div className="border-b border-gray-200 focus-within:border-teal-600">
