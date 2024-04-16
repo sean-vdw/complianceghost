@@ -1,6 +1,7 @@
 import React from 'react';
 import { Fragment, useState } from 'react'
 import { FaceSmileIcon as FaceSmileIconOutline, PaperClipIcon } from '@heroicons/react/24/outline'
+import loadingSpinner from '../assets/load-spinner.svg';
 import axios from 'axios';
 
 // Google Gemini Variables and Dependencies
@@ -69,6 +70,7 @@ function formatText(text) {
 export default function Home() {
   const [userMessage, setUserMessage] = useState('');
   const [aiResponse, setAiResponse] = useState(''); 
+  const [loading, setLoading] = useState(false);
   const formattedText = formatText(aiResponse);
 
   const fullPrompt = `input: You are the leading compliance consultant for RIAs, Wealth Management firms, and broker dealers. These companies pay you top dollar in order to identify potential regulatory risks associated with marketing content that may be delivered as text, audio, and image content marketing. For a piece of content provided, which may be text, audio, or image, provided via a URL, pdf, word file, video file, or text written following this preliminary prompt instruction, identify any language that may be in violation of any SEC or other regulator rules surrounding marketing content. Please identify the specific language that may be in violation of marketing laws, and alternative language that would not violate those same rules. If necessary, create a disclaimer that would allow the content to remain in the marketing piece as-is. Finally, be sure to identify which rules this may be in violation of, or potentially in conflict with. Included is the content that I would like you to review, analyze, and suggest changes for: ${userMessage}`;
@@ -98,22 +100,25 @@ export default function Home() {
   ];
 
   const sendMessage = async () => {
+    setLoading(true);
     try {
       const model = await genAI.getGenerativeModel({ model: "gemini-1.5-pro-latest" });
       const result = await model.generateContent(fullPrompt, generationConfig, safetySettings);
       const response = await result.response.text();
       console.log(response);
       setAiResponse(response);
+      setLoading(false);
     } catch (error) {
       console.error(error);
+      setLoading(false);
     }
   }
 
   return (
     <>
       <div className='bg-white max-w-7xl mx-auto text-left'>
-        <div className='leading-relaxed mt-10 mb-24'>
-          <h1 className='font-semibold text-lg text-cyan-900 bg-cyan-50 py-3 px-2 rounded-3xl text-center max-w-xl mx-auto'>Potential Regulatory Risks in Provided Marketing Content</h1>
+        <div className='leading-relaxed mt-6 mb-24'>
+          <h1 className='font-semibold text-md text-cyan-900 bg-cyan-50 py-3 px-2 rounded-3xl text-center max-w-xl mx-auto mb-4'>Potential Regulatory Risks in Provided Marketing Content</h1>
           <div>
             {formattedText}
           </div>
@@ -153,10 +158,11 @@ export default function Home() {
                   <button
                     type="submit"
                     onSubmit={(e) => { e.preventDefault(); sendMessage(); }}
-                    className="inline-flex items-center rounded-md bg-teal-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-teal-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-teal-600"
+                    className={`${loading ? 'hidden' : 'inline-flex items-center rounded-md bg-teal-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-teal-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-teal-600'}`}
                   >
                     Submit
                   </button>
+                  <img src={loadingSpinner} className={`mx-auto ${loading ? 'block animate-spin size-9' : 'hidden'}`} alt='loading spinner' />
                 </div>
               </div>
             </form>
