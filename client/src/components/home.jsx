@@ -3,7 +3,7 @@ import { FaceSmileIcon as FaceSmileIconOutline, PaperClipIcon } from '@heroicons
 import axios from 'axios';
 
 const API_KEY = process.env.REACT_APP_API_KEY;
-const { GoogleGenerativeAI } = require("@google/generative-ai");
+const { GoogleGenerativeAI, HarmBlockThreshold, HarmCategory } = require("@google/generative-ai");
 
 const genAI = new GoogleGenerativeAI(API_KEY);
 
@@ -11,12 +11,36 @@ export default function Home() {
   const [userMessage, setUserMessage] = useState('');
   const [aiResponse, setAiResponse] = useState(''); 
 
-  const prePrompt = 'You are the leading compliance consultant for RIAs, Wealth Management firms, and broker dealers. These companies pay you top dollar in order to identify and suggest changes to text, audio, and image content marketing that would pose any sort of regulatory risk. For a piece of content provided, which may be text, audio, or image, provided via a URL, pdf, word file, video file, or other file type, identify any language that is in violation of any SEC or other regulator rules surrounding marketing content. If needed, please also provide the suggested revision in text, whether the content should be removed altogether, or a disclaimer that would allow the content to remain in the marketing piece as-is. Finally, be sure to identify which rules this may be in violation of, or potentially in conflict with. Included is the content that I would like you to review, analyze, and suggest changes for.'
+  const fullPrompt = `input: You are the leading compliance consultant for RIAs, Wealth Management firms, and broker dealers. These companies pay you top dollar in order to identify potential regulatory risks associated with marketing content that may be delivered as text, audio, and image content marketing. For a piece of content provided, which may be text, audio, or image, provided via a URL, pdf, word file, video file, or text written following this preliminary prompt instruction, identify any language that may be in violation of any SEC or other regulator rules surrounding marketing content. Please identify the specific language that may be in violation of marketing laws, and alternative language that would not violate those same rules. If necessary, create a disclaimer that would allow the content to remain in the marketing piece as-is. Finally, be sure to identify which rules this may be in violation of, or potentially in conflict with. Included is the content that I would like you to review, analyze, and suggest changes for: ${userMessage}`;
+
+  const generationConfig = {
+    temperature: 1.0,
+    topP: 1,
+    topK: 1,
+  };
+  const safetySettings = [
+    {
+      category: HarmCategory.HARM_CATEGORY_HARASSMENT,
+      threshold: HarmBlockThreshold.BLOCK_MEDIUM_AND_ABOVE,
+    },
+    {
+      category: HarmCategory.HARM_CATEGORY_HATE_SPEECH,
+      threshold: HarmBlockThreshold.BLOCK_MEDIUM_AND_ABOVE,
+    },
+    {
+      category: HarmCategory.HARM_CATEGORY_SEXUALLY_EXPLICIT,
+      threshold: HarmBlockThreshold.BLOCK_MEDIUM_AND_ABOVE,
+    },
+    {
+      category: HarmCategory.HARM_CATEGORY_DANGEROUS_CONTENT,
+      threshold: HarmBlockThreshold.BLOCK_MEDIUM_AND_ABOVE,
+    },
+  ];
 
   const sendMessage = async () => {
     try {
-      const model = await genAI.getGenerativeModel({ model: "gemini-pro" });
-      const result = await model.generateContent(prePrompt, userMessage);
+      const model = await genAI.getGenerativeModel({ model: "gemini-1.5-pro-latest" });
+      const result = await model.generateContent(fullPrompt, generationConfig, safetySettings);
       const response = await result.response.text();
       console.log(response);
       setAiResponse(response);
