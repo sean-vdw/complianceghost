@@ -1,13 +1,32 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
+import { BrowserRouter as Router } from 'react-router-dom';
+
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 
+// Redux packages
+import { configureStore } from '@reduxjs/toolkit';
+import { Provider } from 'react-redux';
+import logger from 'redux-logger';
+import { thunk } from 'redux-thunk';
+
+// Redux store setup
+import reducer from './reducers';
+const store = configureStore({
+  reducer, 
+  middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(logger, thunk),
+});
+
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <App />
+    <Provider store={store}>
+      <Router>
+        <App />
+      </Router>
+    </Provider>
   </React.StrictMode>
 );
 

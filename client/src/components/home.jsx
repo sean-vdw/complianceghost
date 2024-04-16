@@ -129,7 +129,7 @@ export default function Home() {
     <>
       <div className='bg-white max-w-7xl mx-auto mb-64 text-left'>
         <div className='leading-relaxed mt-6 mb-24'>
-          <h1 className='font-semibold text-md text-cyan-900 bg-cyan-50 py-3 px-2 rounded-3xl text-center max-w-xl mx-auto mb-4'>Potential Regulatory Risks in Provided Marketing Content</h1>
+          <h1 className='font-semibold text-md text-cyan-900 bg-slate-50 py-3 px-2 rounded-xl text-center max-w-lg mx-auto mb-4'>Potential Regulatory Risks in Provided Marketing Content</h1>
           <div className='border-solid border-[0.75px] border-slate-200 rounded-lg px-8 pb-10 pt-4'>
             <div className='flex flex-col justify-between'>
               <button
@@ -148,7 +148,7 @@ export default function Home() {
           </div>
         </div>
       </div>
-      <div className='bg-white fixed bottom-6 left-0 right-0 max-w-3xl mx-auto border-solid border-2 border-slate-100 rounded-xl drop-shadow-2xl'>
+      <div className='bg-white fixed bottom-6 left-0 right-0 max-w-3xl mx-auto border-solid border-2 border-slate-100 rounded-2xl drop-shadow-2xl'>
         <div className="flex items-start space-x-4 px-8 py-5">
           <div className="min-w-0 flex-1">
             <form action="#" onSubmit={(e) => { e.preventDefault(); sendMessage(); }}>
@@ -157,7 +157,7 @@ export default function Home() {
                   Add the URL or paste the content you would like to analyze...
                 </label>
                 <textarea
-                  rows={4}
+                  rows={2}
                   name="comment"
                   id="comment"
                   className="block w-full resize-none border-0 border-b border-transparent p-0 pb-2 text-gray-900 placeholder:text-gray-400 focus:border-teal-600 focus:ring-0 sm:text-sm sm:leading-6"
