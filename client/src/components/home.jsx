@@ -1,6 +1,7 @@
 import React from 'react';
 import { Fragment, useState } from 'react'
-import { FaceSmileIcon as FaceSmileIconOutline, PaperClipIcon } from '@heroicons/react/24/outline'
+import { PaperClipIcon } from '@heroicons/react/24/outline'
+import { ClipboardIcon, CheckCircleIcon } from '@heroicons/react/24/solid'
 import loadingSpinner from '../assets/load-spinner.svg';
 import axios from 'axios';
 
@@ -71,6 +72,8 @@ export default function Home() {
   const [userMessage, setUserMessage] = useState('');
   const [aiResponse, setAiResponse] = useState(''); 
   const [loading, setLoading] = useState(false);
+  const [isCopied, setIsCopied] = useState(false);
+
   const formattedText = formatText(aiResponse);
 
   const fullPrompt = `input: You are the leading compliance consultant for RIAs, Wealth Management firms, and broker dealers. These companies pay you top dollar in order to identify potential regulatory risks associated with marketing content that may be delivered as text, audio, and image content marketing. For a piece of content provided, which may be text, audio, or image, provided via a URL, pdf, word file, video file, or text written following this preliminary prompt instruction, identify any language that may be in violation of any SEC or other regulator rules surrounding marketing content. Please identify the specific language that may be in violation of marketing laws, and alternative language that would not violate those same rules. If necessary, create a disclaimer that would allow the content to remain in the marketing piece as-is. Finally, be sure to identify which rules this may be in violation of, or potentially in conflict with. Included is the content that I would like you to review, analyze, and suggest changes for: ${userMessage}`;
@@ -114,13 +117,34 @@ export default function Home() {
     }
   }
 
+  const handleCopy = () => {
+    setIsCopied(true);
+    navigator.clipboard.writeText(aiResponse);
+    setTimeout(() => {
+      setIsCopied(false);
+    }, 2500); // Change back after 4 seconds
+  };
+
   return (
     <>
       <div className='bg-white max-w-7xl mx-auto mb-64 text-left'>
         <div className='leading-relaxed mt-6 mb-24'>
           <h1 className='font-semibold text-md text-cyan-900 bg-cyan-50 py-3 px-2 rounded-3xl text-center max-w-xl mx-auto mb-4'>Potential Regulatory Risks in Provided Marketing Content</h1>
-          <div className='border-solid border-[0.75px] border-slate-200 rounded-lg px-8 py-10'>
-            {formattedText}
+          <div className='border-solid border-[0.75px] border-slate-200 rounded-lg px-8 pb-10 pt-4'>
+            <div className='flex flex-col justify-between'>
+              <button
+                type="button"
+                onClick={handleCopy}
+                className="self-end inline-flex items-center gap-x-1.5 rounded-md bg-slate-100 px-3 py-2 size-10 font-semibold text-white shadow-sm hover:bg-slate-200 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-slate:outline-teal-600"
+              >
+                {isCopied ? (
+                  <CheckCircleIcon className="h-6 w-6 text-green-500 font-extrabold" />
+                ) : (
+                  <ClipboardIcon className="h-6 w-6 text-gray-700" />
+                )}
+              </button>
+              <div>{formattedText}</div>
+            </div>
           </div>
         </div>
       </div>
