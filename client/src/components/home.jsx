@@ -116,10 +116,10 @@ export default function Home() {
 
   return (
     <>
-      <div className='bg-white max-w-7xl mx-auto text-left'>
+      <div className='bg-white max-w-7xl mx-auto mb-64 text-left'>
         <div className='leading-relaxed mt-6 mb-24'>
           <h1 className='font-semibold text-md text-cyan-900 bg-cyan-50 py-3 px-2 rounded-3xl text-center max-w-xl mx-auto mb-4'>Potential Regulatory Risks in Provided Marketing Content</h1>
-          <div>
+          <div className='border-solid border-[0.75px] border-slate-200 rounded-lg px-8 py-10'>
             {formattedText}
           </div>
         </div>
