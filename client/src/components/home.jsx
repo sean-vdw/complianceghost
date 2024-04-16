@@ -32,6 +32,15 @@ function formatText(text) {
       // Bold the text between ** and **
       formattedSentence = formattedSentence.replace(/\*\*(.*?)\*\*/g, (match, p1) => `<strong>${p1}</strong>`);
 
+      // Replace * with unordered list items
+      formattedSentence = formattedSentence.replace(/\*/g, '- ');
+
+      // Remove periods after colons
+      formattedSentence = formattedSentence.replace(/:\./g, ':');
+
+      // Remove the - - before and after the numbered lines
+      formattedSentence = formattedSentence.replace(/- (\d+\. )- /g, '$1');
+
       return (
         <span key={`sentence-${sentenceIndex}`}
           dangerouslySetInnerHTML={{ __html: formattedSentence }}
@@ -41,11 +50,10 @@ function formatText(text) {
 
     // Create a header from the text following "Potential Regulatory Risks in Provided Marketing Content"
     const headerMatch = paragraph.match(/Potential Regulatory Risks in Provided Marketing Content/);
-    const header = headerMatch ? <h2 key={`header-${index}`}>Potential Regulatory Risks in Provided Marketing Content</h2> : null;
+    const header = headerMatch ? <h1 key={`header-${index}`}>Potential Regulatory Risks in Provided Marketing Content</h1> : null;
 
     return (
       <React.Fragment key={`paragraph-${index}`}>
-        {header}
         <p>
           {formattedSentences}
         </p>
@@ -56,6 +64,7 @@ function formatText(text) {
 
   return formattedParagraphs;
 }
+
 
 export default function Home() {
   const [userMessage, setUserMessage] = useState('');
@@ -104,7 +113,10 @@ export default function Home() {
     <>
       <div className='bg-white max-w-7xl mx-auto text-left'>
         <div className='leading-relaxed mt-10 mb-24'>
-          {formattedText}
+          <h1 className='font-semibold text-lg text-cyan-900 bg-cyan-50 py-3 px-2 rounded-3xl text-center max-w-xl mx-auto'>Potential Regulatory Risks in Provided Marketing Content</h1>
+          <div>
+            {formattedText}
+          </div>
         </div>
       </div>
       <div className='bg-white fixed bottom-6 left-0 right-0 max-w-3xl mx-auto border-solid border-2 border-slate-100 rounded-xl drop-shadow-2xl'>
