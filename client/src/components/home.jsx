@@ -1,15 +1,66 @@
+import React from 'react';
 import { Fragment, useState } from 'react'
 import { FaceSmileIcon as FaceSmileIconOutline, PaperClipIcon } from '@heroicons/react/24/outline'
 import axios from 'axios';
 
+// Google Gemini Variables and Dependencies
 const API_KEY = process.env.REACT_APP_API_KEY;
 const { GoogleGenerativeAI, HarmBlockThreshold, HarmCategory } = require("@google/generative-ai");
-
 const genAI = new GoogleGenerativeAI(API_KEY);
+
+// Formatting Text Function
+function formatText(text) {
+  // Split the text into paragraphs
+  const paragraphs = text.split('\n\n');
+
+  // Format each paragraph
+  const formattedParagraphs = paragraphs.map((paragraph, index) => {
+    // Split the paragraph into sentences
+    const sentences = paragraph.split('.');
+
+    // Format each sentence
+    const formattedSentences = sentences.map((sentence, sentenceIndex) => {
+      // Remove leading/trailing whitespace
+      const trimmedSentence = sentence.trim();
+
+      // Add a period to the end of the sentence if it's missing
+      const sentenceWithPeriod = trimmedSentence.endsWith('.') ? trimmedSentence : `${trimmedSentence}.`;
+
+      // Capitalize the first letter of the sentence
+      let formattedSentence = `${sentenceWithPeriod[0].toUpperCase()}${sentenceWithPeriod.slice(1)}`;
+
+      // Bold the text between ** and **
+      formattedSentence = formattedSentence.replace(/\*\*(.*?)\*\*/g, (match, p1) => `<strong>${p1}</strong>`);
+
+      return (
+        <span key={`sentence-${sentenceIndex}`}
+          dangerouslySetInnerHTML={{ __html: formattedSentence }}
+        />
+      );
+    });
+
+    // Create a header from the text following "Potential Regulatory Risks in Provided Marketing Content"
+    const headerMatch = paragraph.match(/Potential Regulatory Risks in Provided Marketing Content/);
+    const header = headerMatch ? <h2 key={`header-${index}`}>Potential Regulatory Risks in Provided Marketing Content</h2> : null;
+
+    return (
+      <React.Fragment key={`paragraph-${index}`}>
+        {header}
+        <p>
+          {formattedSentences}
+        </p>
+        <br />
+      </React.Fragment>
+    );
+  });
+
+  return formattedParagraphs;
+}
 
 export default function Home() {
   const [userMessage, setUserMessage] = useState('');
   const [aiResponse, setAiResponse] = useState(''); 
+  const formattedText = formatText(aiResponse);
 
   const fullPrompt = `input: You are the leading compliance consultant for RIAs, Wealth Management firms, and broker dealers. These companies pay you top dollar in order to identify potential regulatory risks associated with marketing content that may be delivered as text, audio, and image content marketing. For a piece of content provided, which may be text, audio, or image, provided via a URL, pdf, word file, video file, or text written following this preliminary prompt instruction, identify any language that may be in violation of any SEC or other regulator rules surrounding marketing content. Please identify the specific language that may be in violation of marketing laws, and alternative language that would not violate those same rules. If necessary, create a disclaimer that would allow the content to remain in the marketing piece as-is. Finally, be sure to identify which rules this may be in violation of, or potentially in conflict with. Included is the content that I would like you to review, analyze, and suggest changes for: ${userMessage}`;
 
@@ -52,9 +103,9 @@ export default function Home() {
   return (
     <>
       <div className='bg-white max-w-7xl mx-auto text-left'>
-        <p className='leading-relaxed mt-10'>
-          {aiResponse}
-        </p>
+        <div className='leading-relaxed mt-10 mb-24'>
+          {formattedText}
+        </div>
       </div>
       <div className='bg-white fixed bottom-6 left-0 right-0 max-w-3xl mx-auto border-solid border-2 border-slate-100 rounded-xl drop-shadow-2xl'>
         <div className="flex items-start space-x-4 px-8 py-5">
