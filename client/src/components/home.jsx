@@ -70,7 +70,6 @@ function formatText(text) {
   return formattedParagraphs;
 }
 
-
 export default function Home() {
   const [userMessage, setUserMessage] = useState('');
   const [aiResponse, setAiResponse] = useState(''); 
