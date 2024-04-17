@@ -8,16 +8,24 @@ import Footer from './components/footer';
 import RegisterForm from './components/RegisterForm';
 import SignIn from './components/SignIn';
 
+function UserRoutes() {
+  return (
+    <>
+      <Navbar />
+      <Home />
+      <Footer />
+    </>
+  );
+}
+
 function App() {
   return (
     <div className="App">
-      <Navbar />
       <Routes>
-        <Route path="/" element={<Home />} />
+        <Route path="/user/*" element={<UserRoutes />} />
         <Route path="/register" element={<RegisterForm />} />
         <Route path="/login" element={<SignIn />} />
       </Routes>
-      <Footer />
     </div>
   );
 }
