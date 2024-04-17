@@ -43,6 +43,9 @@ function formatText(text) {
       // Remove the - - before and after the numbered lines
       formattedSentence = formattedSentence.replace(/- (\d+\. )- /g, '$1');
 
+      // Insert a line break before text that follows a "-" symbol
+      formattedSentence = formattedSentence.replace(/- /g, '<br />- ');
+
       return (
         <span key={`sentence-${sentenceIndex}`}
           dangerouslySetInnerHTML={{ __html: formattedSentence }}
