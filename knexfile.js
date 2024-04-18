@@ -7,6 +7,11 @@ if (process.env.DATABASE_URL) {
 
 const sharedConfig = {
   client: 'pg',
+  connection: {
+    host: 'localhost',
+    port: 5432,
+    database: process.env.DATABASE_NAME,
+  },
   migrations: { directory: './api/data/migrations' },
   seeds: { directory: './api/data/seeds' },
 }
