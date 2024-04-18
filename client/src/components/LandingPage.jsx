@@ -151,9 +151,17 @@ export default function LandingPage() {
               </a>
             ))}
           </div>
-          <div className="hidden lg:flex lg:flex-1 lg:justify-end">
-            <Link to='/login'>
-              <a href="#" className="text-sm font-semibold leading-6 text-gray-900">
+          <div className="hidden lg:flex lg:flex-1 lg:justify-end align-middle gap-x-6">
+            <Link to='/register'>
+              <button
+                type="button"
+                className="rounded-md bg-cyan-50 px-3 py-2 text-sm font-semibold text-cyan-700 shadow-sm hover:bg-cyan-100"
+              >
+                Sign Up
+              </button>
+            </Link>
+            <Link to='/login' className='flex items-center'>
+              <a href="#" className="text-sm font-semibold px-3 py-2 leading-6 text-gray-900 align-middle">
                 Log in <span aria-hidden="true">&rarr;</span>
               </a>
             </Link>
@@ -193,7 +201,7 @@ export default function LandingPage() {
                     </a>
                   ))}
                 </div>
-                <div className="py-6">
+                <div className="flex flex-col py-6 gap-y-5">
                   <Link to='/login'>
                     <a
                       href="#"
@@ -201,6 +209,14 @@ export default function LandingPage() {
                     >
                       Log in
                     </a>
+                  </Link>
+                  <Link to='/register'>
+                    <button
+                      type="button"
+                      className="rounded-md bg-cyan-50 px-3 py-2 text-sm font-semibold text-cyan-700 shadow-sm hover:bg-cyan-100"
+                    >
+                      Sign Up
+                    </button>
                   </Link>
                 </div>
               </div>
@@ -240,7 +256,7 @@ export default function LandingPage() {
                       href="#"
                       className="rounded-md bg-cyan-600 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-cyan-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-cyan-600"
                     >
-                      Get started
+                      Sign Up
                     </a>
                   </Link>
                 </div>
@@ -390,23 +406,18 @@ export default function LandingPage() {
           </div>
           <div className="mx-auto max-w-2xl text-center">
             <h2 className="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">
-              Boost your productivity.
-              <br />
-              Start using our app today.
+              Stop wasting your time on content reviews.
             </h2>
             <p className="mx-auto mt-6 max-w-xl text-lg leading-8 text-gray-600">
               Incididunt sint fugiat pariatur cupidatat consectetur sit cillum anim id veniam aliqua proident excepteur
               commodo do ea.
             </p>
-            <div className="mt-10 flex items-center justify-center gap-x-6">
+            <div className="mt-10 flex items-center justify-center">
               <a
                 href="#"
                 className="rounded-md bg-cyan-600 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-cyan-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-cyan-600"
               >
-                Get started
-              </a>
-              <a href="#" className="text-sm font-semibold leading-6 text-gray-900">
-                Learn more <span aria-hidden="true">→</span>
+                Sign Up
               </a>
             </div>
           </div>
