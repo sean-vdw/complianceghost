@@ -1,11 +1,13 @@
 import { useState } from 'react';
-import { connect } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { addUser } from '../actions';
 import { useNavigate } from 'react-router-dom';
 
 import { LockClosedIcon } from '@heroicons/react/24/solid';
 
-function RegisterForm({ error, dispatch }) {
+function RegisterForm({ error }) {
+  const [errorMessage, setErrorMessage] = useState(null);
+  const dispatch = useDispatch();
   const navigate = useNavigate();
   const [state, setState] = useState({
     username: '',
@@ -20,16 +22,28 @@ function RegisterForm({ error, dispatch }) {
     });
   };
 
-  const handleSubmit = e => {
+  const handleSubmit = async e => {
     e.preventDefault();
-    if (state.password !== state.confirmPassword) {
-      alert('Passwords must match');
+    if (!state.username || !state.password) {
+      setErrorMessage('Username and password cannot be empty');
+    } else if (state.password.length < 8) {
+      setErrorMessage('Password must be at least 8 characters long');
+    } else if (!/\d/.test(state.password)) {
+      setErrorMessage('Password must contain at least one digit');
+    } else if (!/[!@#$%^&*]/.test(state.password)) {
+      setErrorMessage('Password must contain at least one special character (!@#$%^&*)');
+    } else if (state.password !== state.confirmPassword) {
+      setErrorMessage('Passwords must match');
     } else {
-      dispatch(addUser({
-        username: state.username,
-        password: state.password
-      }));
-      navigate('/login');
+      try {
+        await dispatch(addUser({
+          username: state.username,
+          password: state.password
+        }));
+        navigate('/login');
+      } catch (err) {
+        setErrorMessage('An error occurred while registering');
+      }
     };
   };
 
@@ -38,6 +52,8 @@ function RegisterForm({ error, dispatch }) {
       <div className="max-w-md w-full space-y-8">
         <div>
           <h2 className="mt-6 text-center text-3xl font-extrabold text-gray-900">Sign Up</h2>
+          {error && <p className="text-center text-red-500">{error}</p>}
+          {errorMessage && <p className="text-center text-red-500">{errorMessage}</p>}
         </div>
         <form className="mt-8 space-y-6" onSubmit={handleSubmit}>
           <input type="hidden" name="remember" defaultValue="true" />
@@ -125,4 +141,4 @@ const mapStateToProps = state => {
   };
 };
 
-export default connect(mapStateToProps)(RegisterForm);
+export default RegisterForm;

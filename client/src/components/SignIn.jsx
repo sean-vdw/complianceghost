@@ -1,5 +1,38 @@
+import { useState } from 'react';
+import { useDispatch } from 'react-redux';
+import { loginUser } from '../actions'; // replace with your actual action
+import { useNavigate } from 'react-router-dom';
 
 export default function SignIn() {
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const [state, setState] = useState({
+    email: '',
+    password: ''
+  });
+  const [errorMessage, setErrorMessage] = useState(null);
+
+  const handleChange = e => {
+    setState({
+      ...state,
+      [e.target.name]: e.target.value
+    });
+  };
+
+  const handleSubmit = async e => {
+    e.preventDefault();
+    if (!state.email || !state.password) {
+      setErrorMessage('Email and password cannot be empty');
+    } else {
+      try {
+        await dispatch(loginUser(state));
+        navigate('/dashboard'); // replace with your actual route
+      } catch (err) {
+        setErrorMessage('An error occurred while logging in');
+      }
+    };
+  };
+  
   return (
     <>
       <div className="flex min-h-full flex-1 items-center justify-center px-4 py-12 sm:px-6 lg:px-8">
@@ -14,7 +47,7 @@ export default function SignIn() {
               Sign in to your account
             </h2>
           </div>
-          <form className="space-y-6" action="#" method="POST">
+          <form className="space-y-6" action="#" method="POST" onSubmit={handleSubmit}>
             <div className="relative -space-y-px rounded-md shadow-sm">
               <div className="pointer-events-none absolute inset-0 z-10 rounded-md ring-1 ring-inset ring-gray-300" />
               <div>
@@ -29,6 +62,8 @@ export default function SignIn() {
                   required
                   className="relative block w-full rounded-t-md border-0 py-1.5 text-gray-900 ring-1 ring-inset ring-gray-100 placeholder:text-gray-400 focus:z-10 focus:ring-2 focus:ring-inset focus:ring-cyan-600 sm:text-sm sm:leading-6"
                   placeholder="Email address"
+                  value={state.email}
+                  onChange={handleChange}
                 />
               </div>
               <div>
@@ -43,8 +78,11 @@ export default function SignIn() {
                   required
                   className="relative block w-full rounded-b-md border-0 py-1.5 text-gray-900 ring-1 ring-inset ring-gray-100 placeholder:text-gray-400 focus:z-10 focus:ring-2 focus:ring-inset focus:ring-cyan-600 sm:text-sm sm:leading-6"
                   placeholder="Password"
+                  value={state.password}
+                  onChange={handleChange}
                 />
               </div>
+              {errorMessage && <p className="text-center text-red-500">{errorMessage}</p>}
             </div>
 
             <div className="flex items-center justify-between">
