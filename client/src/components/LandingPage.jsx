@@ -230,7 +230,7 @@ export default function LandingPage() {
             <div className="mx-auto max-w-7xl px-6 lg:px-8">
               <div className="mx-auto max-w-2xl text-center">
                 <h1 className="text-4xl font-bold tracking-tight text-gray-900 sm:text-6xl">
-                  Compliance review of marketing content in <span className='line-through'>55 minutes</span> <span className='text-teal-700'>4 seconds</span>.
+                  Compliance review of marketing content in <br /><span className='line-through'>55 minutes</span> <span className='text-teal-700'>4 seconds</span>.
                 </h1>
                 <p className="mt-6 text-lg leading-8 text-gray-600">
                   Anim aute id magna aliqua ad ad non deserunt sunt. Qui irure qui lorem cupidatat commodo. Elit sunt
