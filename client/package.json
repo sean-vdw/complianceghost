@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@auth0/auth0-react": "^2.2.4",
     "@google/generative-ai": "^0.7.0",
     "@headlessui/react": "^1.7.19",
     "@heroicons/react": "^2.1.3",
