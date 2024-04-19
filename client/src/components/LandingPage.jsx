@@ -146,14 +146,13 @@ export default function LandingPage() {
             ))}
           </div>
           <div className="hidden lg:flex lg:flex-1 lg:justify-end align-middle gap-x-6">
-            <Link to='/register'>
-              <button
-                type="button"
-                className="rounded-md bg-cyan-50 px-3 py-2 text-sm font-semibold text-cyan-700 shadow-sm hover:bg-cyan-100"
-              >
-                Sign Up
-              </button>
-            </Link>
+            <button
+              onClick={handleLogin}
+              type="button"
+              className="rounded-md bg-cyan-50 px-3 py-2 text-sm font-semibold text-cyan-700 shadow-sm hover:bg-cyan-100"
+            >
+              Sign Up
+            </button>
             <div className='flex items-center'>
               <a href="#" onClick={handleLogin} className="text-sm font-semibold px-3 py-2 leading-6 text-gray-900 align-middle">
                 Log in <span aria-hidden="true">&rarr;</span>
@@ -203,14 +202,13 @@ export default function LandingPage() {
                   >
                     Log in
                   </a>
-                  <Link to='/register'>
-                    <button
-                      type="button"
-                      className="rounded-md bg-cyan-50 px-3 py-2 text-sm font-semibold text-cyan-700 shadow-sm hover:bg-cyan-100"
-                    >
-                      Sign Up
-                    </button>
-                  </Link>
+                  <button
+                    type="button"
+                    onClick={handleLogin}
+                    className="rounded-md bg-cyan-50 px-3 py-2 text-sm font-semibold text-cyan-700 shadow-sm hover:bg-cyan-100"
+                  >
+                    Sign Up
+                  </button>
                 </div>
               </div>
             </div>
@@ -244,14 +242,13 @@ export default function LandingPage() {
                   amet fugiat veniam occaecat fugiat aliqua.
                 </p>
                 <div className="mt-10 flex items-center justify-center">
-                  <Link to='/register'>
-                    <a
-                      href="#"
-                      className="rounded-md bg-cyan-600 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-cyan-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-cyan-600"
-                    >
-                      Sign Up
-                    </a>
-                  </Link>
+                  <a
+                    href="#"
+                    onClick={handleLogin}
+                    className="rounded-md bg-cyan-600 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-cyan-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-cyan-600"
+                  >
+                    Sign Up
+                  </a>
                 </div>
               </div>
               <div className="mt-16 flow-root sm:mt-24">
