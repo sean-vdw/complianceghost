@@ -308,7 +308,12 @@ export default function LandingPage() {
         </div>
 
         {/* Pricing section */}
-        <div className="py-24 sm:pt-48">
+        <stripe-pricing-table
+          pricing-table-id="prctbl_1P7QHcGsmD2eSVUWdYjccxoS"
+          publishable-key="pk_live_51NC8lQGsmD2eSVUW4ynbOYWuyAd9hEkAmJGwiWsGn8CCtvVQwiJuct8XJiSaoPSDIiJL2H4A6aLezmE6LTdPb33O00z71twcGy"
+        >
+        </stripe-pricing-table>
+        {/* <div className="py-24 sm:pt-48">
           <div className="mx-auto max-w-7xl px-6 lg:px-8">
             <div className="mx-auto max-w-4xl text-center">
               <h2 className="text-base font-semibold leading-7 text-cyan-600">Pricing</h2>
@@ -377,7 +382,7 @@ export default function LandingPage() {
               ))}
             </div>
           </div>
-        </div>
+        </div> */}
 
         {/* CTA section */}
         <div className="relative -z-10 mt-32 px-6 lg:px-8">
