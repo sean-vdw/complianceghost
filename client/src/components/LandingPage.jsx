@@ -13,6 +13,8 @@ import { CheckIcon } from '@heroicons/react/20/solid'
 import screenshot from '../assets/product-screenshot.png'
 import logo from '../assets/Logo-main.svg'
 
+import { useAuth0 } from '@auth0/auth0-react'
+
 const navigation = [
   { name: 'Product', href: '#' },
   { name: 'Features', href: '#' },
@@ -104,6 +106,12 @@ function classNames(...classes) {
 
 export default function LandingPage() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
+  const { loginWithRedirect } = useAuth0();
+
+  const handleLogin = (e) => {
+    e.preventDefault()
+    loginWithRedirect();
+  }
 
   return (
     <div className="bg-white text-left">
@@ -146,11 +154,11 @@ export default function LandingPage() {
                 Sign Up
               </button>
             </Link>
-            <Link to='/login' className='flex items-center'>
-              <a href="#" className="text-sm font-semibold px-3 py-2 leading-6 text-gray-900 align-middle">
+            <div className='flex items-center'>
+              <a href="#" onClick={handleLogin} className="text-sm font-semibold px-3 py-2 leading-6 text-gray-900 align-middle">
                 Log in <span aria-hidden="true">&rarr;</span>
               </a>
-            </Link>
+            </div>
           </div>
         </nav>
         <Dialog as="div" className="lg:hidden" open={mobileMenuOpen} onClose={setMobileMenuOpen}>
@@ -188,14 +196,13 @@ export default function LandingPage() {
                   ))}
                 </div>
                 <div className="flex flex-col py-6 gap-y-5">
-                  <Link to='/login'>
-                    <a
-                      href="#"
-                      className="-mx-3 block rounded-lg px-3 py-2.5 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50"
-                    >
-                      Log in
-                    </a>
-                  </Link>
+                  <a
+                    href="#"
+                    onClick={handleLogin}
+                    className="-mx-3 block rounded-lg px-3 py-2.5 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50"
+                  >
+                    Log in
+                  </a>
                   <Link to='/register'>
                     <button
                       type="button"

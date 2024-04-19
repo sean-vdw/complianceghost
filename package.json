@@ -29,6 +29,7 @@
     "supertest": "^6.2.2"
   },
   "dependencies": {
+    "@auth0/auth0-react": "^2.2.4",
     "@reduxjs/toolkit": "^2.2.3",
     "bcryptjs": "^2.4.3",
     "cors": "^2.8.5",

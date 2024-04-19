@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { loginUser } from '../actions'; // replace with your actual action
+import { loginUser } from '../actions'; 
 import { useNavigate } from 'react-router-dom';
 
 export default function SignIn() {

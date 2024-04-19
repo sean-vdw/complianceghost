@@ -1,6 +1,9 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
+import { createRoot } from 'react-dom/client';
 import { BrowserRouter as Router } from 'react-router-dom';
+
+import { Auth0Provider } from '@auth0/auth0-react';
 
 import './index.css';
 import App from './App';
@@ -21,13 +24,21 @@ const store = configureStore({
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
-  <React.StrictMode>
-    <Provider store={store}>
-      <Router>
-        <App />
-      </Router>
-    </Provider>
-  </React.StrictMode>
+  <Auth0Provider
+    domain="dev-haebwa8jada12quw.us.auth0.com"
+    clientId="dSi2x1sXqBWPYvjyZhjsbqDEZu6TxPSb"
+    authorizationParams={{
+      redirect_uri: 'https://zipreview.io/user'
+  }}
+  >
+    <React.StrictMode>
+      <Provider store={store}>
+        <Router>
+          <App />
+        </Router>
+      </Provider>
+    </React.StrictMode>
+  </Auth0Provider>
 );
 
 // If you want to start measuring performance in your app, pass a function
