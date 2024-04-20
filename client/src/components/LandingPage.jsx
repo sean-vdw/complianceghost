@@ -53,8 +53,16 @@ const tiers = [
     id: 'tier-monthly',
     href: '#',
     priceMonthly: '$24',
-    description: 'The essentials to provide your best work for clients.',
-    features: ['5 products', 'Up to 1,000 subscribers', 'Basic analytics', '48-hour support response time'],
+    stripeId: 'buy_btn_1P7ljvGsmD2eSVUWLAxKwTqO',
+    publishableKey: 'pk_live_51NC8lQGsmD2eSVUW4ynbOYWuyAd9hEkAmJGwiWsGn8CCtvVQwiJuct8XJiSaoPSDIiJL2H4A6aLezmE6LTdPb33O00z71twcGy',
+    description: "Flexible, month-to-month plan.",
+    features: [
+      'Unlimited reviews of content, documents, and files', 
+      'Automatic archiving for seamless checks and audits', 
+      'Relevant content suggestions and marketing rule citations',
+      'Share and collaborate with your team seamlessly',
+    ],
+    featured: false,
     mostPopular: false,
   },
   {
@@ -62,17 +70,21 @@ const tiers = [
     id: 'tier-annual',
     href: '#',
     priceMonthly: '$18',
-    description: 'A plan that scales with your rapidly growing business.',
+    stripeId: 'buy_btn_1P7lhtGsmD2eSVUWxHlg7foX',
+    publishableKey: 'pk_live_51NC8lQGsmD2eSVUW4ynbOYWuyAd9hEkAmJGwiWsGn8CCtvVQwiJuct8XJiSaoPSDIiJL2H4A6aLezmE6LTdPb33O00z71twcGy',
+    description: 'Our most popular, cost-efficient plan.',
     features: [
-      '25 products',
-      'Up to 10,000 subscribers',
-      'Advanced analytics',
-      '24-hour support response time',
-      'Marketing automations',
+      'Unlimited reviews of content, documents, and files', 
+      'Automatic archiving for seamless checks and audits', 
+      'Relevant content suggestions and marketing rule citations',
+      'Share and collaborate with your team seamlessly',
+      'Discounted annual pricing',
     ],
+    featured: true,
     mostPopular: true,
   },
 ]
+
 const footerNavigation = {
   solutions: [
     { name: 'Hosting', href: '#' },
@@ -277,76 +289,129 @@ export default function LandingPage() {
             />
           </div>
         </div>
-
-        {/* Feature section */}
-        <div className="mx-auto mt-32 max-w-7xl px-6 sm:mt-56 lg:px-8">
-          <div className="mx-auto max-w-2xl lg:text-center">
-            <h2 className="text-base font-semibold leading-7 text-cyan-600">Deploy faster</h2>
-            <p className="mt-2 text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">
-              Everything you need to deploy your app
-            </p>
-            <p className="mt-6 text-lg leading-8 text-gray-600">
-              Quis tellus eget adipiscing convallis sit sit eget aliquet quis. Suspendisse eget egestas a elementum
-              pulvinar et feugiat blandit at. In mi viverra elit nunc.
-            </p>
-          </div>
-          <div className="mx-auto mt-16 max-w-2xl sm:mt-20 lg:mt-24 lg:max-w-4xl">
-            <dl className="grid max-w-xl grid-cols-1 gap-x-8 gap-y-10 lg:max-w-none lg:grid-cols-2 lg:gap-y-16">
-              {features.map((feature) => (
-                <div key={feature.name} className="relative pl-16">
-                  <dt className="text-base font-semibold leading-7 text-gray-900">
-                    <div className="absolute left-0 top-0 flex h-10 w-10 items-center justify-center rounded-lg bg-cyan-600">
-                      <feature.icon className="h-6 w-6 text-white" aria-hidden="true" />
-                    </div>
-                    {feature.name}
-                  </dt>
-                  <dd className="mt-2 text-base leading-7 text-gray-600">{feature.description}</dd>
-                </div>
-              ))}
-            </dl>
-          </div>
-        </div>
-
-        {/* Pricing section / CTA */}
-        <div className="relative columns-2 -z-10 mt-32 px-6 lg:px-8">
-          <div
-            className="absolute inset-x-0 top-1/2 -z-10 flex -translate-y-1/2 transform-gpu justify-center overflow-hidden blur-3xl sm:bottom-0 sm:right-[calc(50%-6rem)] sm:top-auto sm:translate-y-0 sm:transform-gpu sm:justify-end"
-            aria-hidden="true"
-          >
-            <div
-              className="aspect-[1108/632] w-[69.25rem] flex-none bg-gradient-to-r from-[#014871] to-[#d7ede2] opacity-25"
-              style={{
-                clipPath:
-                  'polygon(73.6% 48.6%, 91.7% 88.5%, 100% 53.9%, 97.4% 18.1%, 92.5% 15.4%, 75.7% 36.3%, 55.3% 52.8%, 46.5% 50.9%, 45% 37.4%, 50.3% 13.1%, 21.3% 36.2%, 0.1% 0.1%, 5.4% 49.1%, 21.4% 36.4%, 58.9% 100%, 73.6% 48.6%)',
-              }}
-            />
-          </div>
-          <div className="mx-auto max-w-2xl md:text-left text-center">
-            <h2 className="text-5xl font-bold tracking-tight text-gray-900 sm:text-4xl">
-              Stop wasting time reviewing <br />marketing collateral.
-            </h2>
-            <div className="mt-10 flex items-center justify-center">
-              <stripe-pricing-table
-                pricing-table-id="prctbl_1P7QHcGsmD2eSVUWdYjccxoS"
-                publishable-key="pk_live_51NC8lQGsmD2eSVUW4ynbOYWuyAd9hEkAmJGwiWsGn8CCtvVQwiJuct8XJiSaoPSDIiJL2H4A6aLezmE6LTdPb33O00z71twcGy"
-              >
-              </stripe-pricing-table>
-            </div>
-          </div>
-          <div
-            className="absolute left-1/2 right-0 top-full -z-10 hidden -translate-y-1/2 transform-gpu overflow-hidden blur-3xl sm:block"
-            aria-hidden="true"
-          >
-            <div
-              className="aspect-[1155/678] w-[72.1875rem] bg-gradient-to-tr from-[#014871] to-[#d7ede2] opacity-30"
-              style={{
-                clipPath:
-                  'polygon(74.1% 44.1%, 100% 61.6%, 97.5% 26.9%, 85.5% 0.1%, 80.7% 2%, 72.5% 32.5%, 60.2% 62.4%, 52.4% 68.1%, 47.5% 58.3%, 45.2% 34.5%, 27.5% 76.7%, 0.1% 64.9%, 17.9% 100%, 27.6% 76.8%, 76.1% 97.7%, 74.1% 44.1%)',
-              }}
-            />
-          </div>
-        </div>
       </main>
+
+      {/* Feature section */}
+      <div className="mx-auto mt-32 max-w-7xl px-6 sm:mt-56 lg:px-8">
+        <div className="mx-auto max-w-2xl lg:text-center">
+          <h2 className="text-base font-semibold leading-7 text-cyan-600">Deploy faster</h2>
+          <p className="mt-2 text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">
+            Everything you need to deploy your app
+          </p>
+          <p className="mt-6 text-lg leading-8 text-gray-600">
+            Quis tellus eget adipiscing convallis sit sit eget aliquet quis. Suspendisse eget egestas a elementum
+            pulvinar et feugiat blandit at. In mi viverra elit nunc.
+          </p>
+        </div>
+        <div className="mx-auto mt-16 max-w-2xl sm:mt-20 lg:mt-24 lg:max-w-4xl">
+          <dl className="grid max-w-xl grid-cols-1 gap-x-8 gap-y-10 lg:max-w-none lg:grid-cols-2 lg:gap-y-16">
+            {features.map((feature) => (
+              <div key={feature.name} className="relative pl-16">
+                <dt className="text-base font-semibold leading-7 text-gray-900">
+                  <div className="absolute left-0 top-0 flex h-10 w-10 items-center justify-center rounded-lg bg-cyan-600">
+                    <feature.icon className="h-6 w-6 text-white" aria-hidden="true" />
+                  </div>
+                  {feature.name}
+                </dt>
+                <dd className="mt-2 text-base leading-7 text-gray-600">{feature.description}</dd>
+              </div>
+            ))}
+          </dl>
+        </div>
+      </div>
+
+      {/* Pricing section / CTA */}
+      <div className="relative isolate bg-white mt-36 px-6 py-24 sm:py-32 lg:px-8">
+        <div className="absolute inset-x-0 -top-3 -z-10 transform-gpu overflow-hidden px-36 blur-3xl" aria-hidden="true">
+          <div
+            className="mx-auto aspect-[1155/678] w-[72.1875rem] bg-gradient-to-tr from-[#014871] to-[#d7ede2] opacity-30"
+            style={{
+              clipPath:
+                'polygon(74.1% 44.1%, 100% 61.6%, 97.5% 26.9%, 85.5% 0.1%, 80.7% 2%, 72.5% 32.5%, 60.2% 62.4%, 52.4% 68.1%, 47.5% 58.3%, 45.2% 34.5%, 27.5% 76.7%, 0.1% 64.9%, 17.9% 100%, 27.6% 76.8%, 76.1% 97.7%, 74.1% 44.1%)',
+            }}
+          />
+        </div>
+        <div className="mx-auto max-w-2xl text-center lg:max-w-4xl">
+          <h2 className="text-base font-semibold leading-7 text-cyan-600">Pricing</h2>
+          <p className="mt-2 text-4xl font-bold tracking-tight text-gray-900 sm:text-5xl">
+            It pays for itself in the first month
+          </p>
+        </div>
+        <p className="mx-auto mt-6 max-w-2xl text-center text-xl leading-8 text-gray-600">
+          The average compliance professional costs <strong>$65 per hour</strong>.<br /> Start spending that time on higher value items.
+        </p>
+        <div className="mx-auto mt-16 grid max-w-lg grid-cols-1 items-center gap-y-6 sm:mt-20 sm:gap-y-0 lg:max-w-4xl lg:grid-cols-2">
+          {tiers.map((tier, tierIdx) => (
+            <div
+              key={tier.id}
+              className={classNames(
+                tier.featured ? 'relative bg-gray-900 shadow-2xl' : 'bg-white/60 sm:mx-8 lg:mx-0',
+                tier.featured
+                  ? ''
+                  : tierIdx === 0
+                  ? 'rounded-t-3xl sm:rounded-b-none lg:rounded-tr-none lg:rounded-bl-3xl'
+                  : 'sm:rounded-t-none lg:rounded-tr-3xl lg:rounded-bl-none',
+                'rounded-3xl p-8 ring-1 ring-gray-900/10 sm:p-10'
+              )}
+            >
+              <div className='flex items-center justify-between gap-x-4'>
+                <h3
+                  id={tier.id}
+                  className={classNames(
+                    tier.featured ? 'text-cyan-400' : 'text-cyan-600',
+                    'text-base font-semibold leading-7'
+                  )}
+                >
+                  {tier.name}
+                </h3>
+                {tier.mostPopular ? (
+                    <p className="rounded-full bg-green-600 px-2.5 py-1 text-sm font-semibold leading-5 text-white">
+                      Save $72 per year
+                    </p>
+                  ) : null}
+              </div>
+              <p className="mt-4 flex items-baseline gap-x-2">
+                <span
+                  className={classNames(
+                    tier.featured ? 'text-white' : 'text-gray-900',
+                    'text-5xl font-bold tracking-tight'
+                  )}
+                >
+                  {tier.priceMonthly}
+                </span>
+                <span className={classNames(tier.featured ? 'text-gray-400' : 'text-gray-500', 'text-base')}>/month</span>
+              </p>
+              <p className={classNames(tier.featured ? 'text-gray-300' : 'text-gray-600', 'mt-6 text-base leading-7')}>
+                {tier.description}
+              </p>
+              <ul
+                role="list"
+                className={classNames(
+                  tier.featured ? 'text-gray-300' : 'text-gray-600',
+                  'mt-8 space-y-3 text-sm leading-6 sm:mt-10'
+                )}
+              >
+                {tier.features.map((feature) => (
+                  <li key={feature} className="flex gap-x-3">
+                    <CheckIcon
+                      className={classNames(tier.featured ? 'text-cyan-400' : 'text-cyan-600', 'h-6 w-5 flex-none')}
+                      aria-hidden="true"
+                    />
+                    {feature}
+                  </li>
+                ))}
+              </ul>
+              <div className='mt-8 flex justify-center'>
+                <stripe-buy-button
+                  buy-button-id={tier.stripeId}
+                  publishable-key={tier.publishableKey}
+                >
+                </stripe-buy-button>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
 
       {/* Footer */}
       <div className="mx-auto mt-32 max-w-7xl px-6 lg:px-8">
