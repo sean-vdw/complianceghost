@@ -1,5 +1,5 @@
-import { useState } from 'react'
-import { Dialog } from '@headlessui/react'
+import { useState, Fragment } from 'react'
+import { Dialog, Transition } from '@headlessui/react'
 import { Link } from 'react-router-dom'
 import {
   ArrowPathIcon,
@@ -16,9 +16,8 @@ import logo from '../assets/Logo-main.svg'
 import { useAuth0 } from '@auth0/auth0-react'
 
 const navigation = [
-  { name: 'Product', href: '#' },
-  { name: 'Features', href: '#' },
-  { name: 'Marketplace', href: '#' },
+  { name: 'Features', href: '#appFeatures' },
+  { name: 'Pricing', href: '#appPricing' },
   { name: 'Company', href: '#' },
 ]
 const features = [
@@ -118,6 +117,7 @@ function classNames(...classes) {
 
 export default function LandingPage() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
+  const [open, setOpen] = useState(false)
   const { loginWithRedirect } = useAuth0();
 
   const handleLogin = (e) => {
@@ -227,6 +227,56 @@ export default function LandingPage() {
           </Dialog.Panel>
         </Dialog>
       </header>
+      
+      {/* Get Started Dialogue Box */}
+      <Transition.Root show={open} as={Fragment}>
+        <Dialog as="div" className="relative z-10" onClose={setOpen}>
+          <Transition.Child
+            as={Fragment}
+            enter="ease-out duration-300"
+            enterFrom="opacity-0"
+            enterTo="opacity-100"
+            leave="ease-in duration-200"
+            leaveFrom="opacity-100"
+            leaveTo="opacity-0"
+          >
+            <div className="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity" />
+          </Transition.Child>
+
+          <div className="fixed inset-0 z-10 w-screen overflow-y-auto">
+            <div className="flex min-h-full items-end justify-center p-4 text-center sm:items-center sm:p-0">
+              <Transition.Child
+                as={Fragment}
+                enter="ease-out duration-300"
+                enterFrom="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
+                enterTo="opacity-100 translate-y-0 sm:scale-100"
+                leave="ease-in duration-200"
+                leaveFrom="opacity-100 translate-y-0 sm:scale-100"
+                leaveTo="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
+              >
+                <Dialog.Panel className="relative transform overflow-hidden rounded-lg bg-white px-4 pb-4 pt-5 text-left shadow-xl transition-all sm:my-8 sm:w-full sm:max-w-sm sm:p-6">
+                  <div>
+                    <stripe-pricing-table 
+                      pricing-table-id="prctbl_1P7u6oGsmD2eSVUW2i9pzASo"
+                      publishable-key="pk_live_51NC8lQGsmD2eSVUW4ynbOYWuyAd9hEkAmJGwiWsGn8CCtvVQwiJuct8XJiSaoPSDIiJL2H4A6aLezmE6LTdPb33O00z71twcGy"
+                    >
+                    </stripe-pricing-table>
+                  </div>
+                  <div className="mt-5 sm:mt-6">
+                    <button
+                      type="button"
+                      className="inline-flex w-full justify-center rounded-md bg-teal-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-teal-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-teal-600"
+                      onClick={() => setOpen(false)}
+                    >
+                      Go back to dashboard
+                    </button>
+                  </div>
+                </Dialog.Panel>
+              </Transition.Child>
+            </div>
+          </div>
+        </Dialog>
+      </Transition.Root>
 
       <main className="isolate">
         {/* Hero section */}
@@ -256,7 +306,7 @@ export default function LandingPage() {
                 <div className="mt-10 flex items-center justify-center">
                   <a
                     href="#"
-                    onClick={handleLogin}
+                    onClick={() => setOpen(true)}
                     className="rounded-md bg-cyan-600 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-cyan-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-cyan-600"
                   >
                     Sign Up
@@ -292,7 +342,7 @@ export default function LandingPage() {
       </main>
 
       {/* Feature section */}
-      <div className="mx-auto mt-32 max-w-7xl px-6 sm:mt-56 lg:px-8">
+      <div id='appFeatures' className="mx-auto mt-32 max-w-7xl px-6 sm:mt-56 lg:px-8">
         <div className="mx-auto max-w-2xl lg:text-center">
           <h2 className="text-base font-semibold leading-7 text-cyan-600">Deploy faster</h2>
           <p className="mt-2 text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">
@@ -321,7 +371,7 @@ export default function LandingPage() {
       </div>
 
       {/* Pricing section / CTA */}
-      <div className="relative isolate bg-white mt-36 px-6 py-24 sm:py-32 lg:px-8">
+      <div id='appPricing' className="relative isolate bg-white mt-36 px-6 py-24 sm:py-32 lg:px-8">
         <div className="absolute inset-x-0 -top-3 -z-10 transform-gpu overflow-hidden px-36 blur-3xl" aria-hidden="true">
           <div
             className="mx-auto aspect-[1155/678] w-[72.1875rem] bg-gradient-to-tr from-[#014871] to-[#d7ede2] opacity-30"
