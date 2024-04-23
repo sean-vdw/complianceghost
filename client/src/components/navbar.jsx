@@ -11,11 +11,6 @@ function classNames(...classes) {
 export default function Navbar() {
   const { logout } = useAuth0();
 
-  const handleLogout = (e) => {
-    e.preventDefault();
-    logout({ returnTo: window.location.origin });
-  };
-
   return (
     <Disclosure as="nav" className="bg-white shadow text-left">
       {({ open }) => (
@@ -111,7 +106,7 @@ export default function Navbar() {
                         {({ active }) => (
                           <a
                             href="#"
-                            onClick={handleLogout}
+                            onClick={() => logout({ logoutParams: { returnTo: window.location.origin } })}
                             className={classNames(active ? 'bg-gray-100' : '', 'block px-4 py-2 text-sm text-gray-700')}
                           >
                             Sign out
@@ -209,7 +204,7 @@ export default function Navbar() {
                 <Disclosure.Button
                   as="a"
                   href="#"
-                  onClick={handleLogout}
+                  onClick={() => logout({ logoutParams: { returnTo: window.location.origin } })}
                   className="block px-4 py-2 text-base font-medium text-gray-500 hover:bg-gray-100 hover:text-gray-800"
                 >
                   Sign out

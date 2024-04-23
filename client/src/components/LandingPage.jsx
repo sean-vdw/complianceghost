@@ -120,11 +120,6 @@ export default function LandingPage() {
   const [open, setOpen] = useState(false)
   const { loginWithRedirect } = useAuth0();
 
-  const handleLogin = (e) => {
-    e.preventDefault()
-    loginWithRedirect();
-  }
-
   return (
     <div className="bg-white text-left">
       {/* Header */}
@@ -159,14 +154,14 @@ export default function LandingPage() {
           </div>
           <div className="hidden lg:flex lg:flex-1 lg:justify-end align-middle gap-x-6">
             <button
-              onClick={handleLogin}
+              onClick={() => loginWithRedirect()}
               type="button"
               className="rounded-md bg-cyan-50 px-3 py-2 text-sm font-semibold text-cyan-700 shadow-sm hover:bg-cyan-100"
             >
               Sign Up
             </button>
             <div className='flex items-center'>
-              <a href="#" onClick={handleLogin} className="text-sm font-semibold px-3 py-2 leading-6 text-gray-900 align-middle">
+              <a href="#" onClick={() => loginWithRedirect()} className="text-sm font-semibold px-3 py-2 leading-6 text-gray-900 align-middle">
                 Log in <span aria-hidden="true">&rarr;</span>
               </a>
             </div>
@@ -209,14 +204,14 @@ export default function LandingPage() {
                 <div className="flex flex-col py-6 gap-y-5">
                   <a
                     href="#"
-                    onClick={handleLogin}
+                    onClick={() => loginWithRedirect()}
                     className="-mx-3 block rounded-lg px-3 py-2.5 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50"
                   >
                     Log in
                   </a>
                   <button
                     type="button"
-                    onClick={handleLogin}
+                    onClick={() => loginWithRedirect()}
                     className="rounded-md bg-cyan-50 px-3 py-2 text-sm font-semibold text-cyan-700 shadow-sm hover:bg-cyan-100"
                   >
                     Sign Up
