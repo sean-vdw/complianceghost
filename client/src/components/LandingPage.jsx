@@ -52,7 +52,7 @@ const tiers = [
     id: 'tier-monthly',
     href: '#',
     priceMonthly: '$24',
-    stripeId: 'buy_btn_1P7ljvGsmD2eSVUWLAxKwTqO',
+    stripeId: 'buy_btn_1P8pnjGsmD2eSVUWq7xajjw7',
     publishableKey: 'pk_live_51NC8lQGsmD2eSVUW4ynbOYWuyAd9hEkAmJGwiWsGn8CCtvVQwiJuct8XJiSaoPSDIiJL2H4A6aLezmE6LTdPb33O00z71twcGy',
     description: "Flexible, month-to-month plan.",
     features: [
@@ -69,7 +69,7 @@ const tiers = [
     id: 'tier-annual',
     href: '#',
     priceMonthly: '$18',
-    stripeId: 'buy_btn_1P7lhtGsmD2eSVUWxHlg7foX',
+    stripeId: 'buy_btn_1P8ppjGsmD2eSVUWKTHcfrAO',
     publishableKey: 'pk_live_51NC8lQGsmD2eSVUW4ynbOYWuyAd9hEkAmJGwiWsGn8CCtvVQwiJuct8XJiSaoPSDIiJL2H4A6aLezmE6LTdPb33O00z71twcGy',
     description: 'Our most popular, cost-efficient plan.',
     features: [

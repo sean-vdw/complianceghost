@@ -11,6 +11,7 @@ import Footer from './components/footer';
 import RegisterForm from './components/RegisterForm';
 import SignIn from './components/SignIn';
 import Profile from './components/Profile';
+import Support from "./components/Support";
 
 function UserRoutes() {
   const { isAuthenticated } = useAuth0();
@@ -42,6 +43,7 @@ function App() {
         <Route path="/user/*" element={<UserRoutes />} />
         <Route path="/register" element={<RegisterForm />} />
         <Route path="/login" element={<SignIn />} />
+        <Route path="/support" element={<Support />} />
       </Routes>
     </div>
   );
