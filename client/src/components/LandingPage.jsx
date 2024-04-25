@@ -16,6 +16,7 @@ import { useAuth0 } from '@auth0/auth0-react'
 
 import LoginButton from './LoginButton'
 import SignUpButton from './SignUpButton'
+import GetStartedButton from './GetStartedButton'
 
 const navigation = [
   { name: 'Features', href: '#appFeatures' },
@@ -166,7 +167,7 @@ export default function LandingPage() {
           <Dialog.Panel className="fixed inset-y-0 right-0 z-50 w-full overflow-y-auto bg-white px-6 py-6 sm:max-w-sm sm:ring-1 sm:ring-gray-900/10">
             <div className="flex items-center justify-between">
               <a href="#" className="-m-1.5 p-1.5">
-                <span className="sr-only">Your Company</span>
+                <span className="sr-only">ZipReview</span>
                 <img
                   className="h-8 w-auto"
                   src={logo}
@@ -400,7 +401,7 @@ export default function LandingPage() {
                 >
                   {tier.priceMonthly}
                 </span>
-                <span className={classNames(tier.featured ? 'text-gray-400' : 'text-gray-500', 'text-base')}>/month</span>
+                <span className={classNames(tier.featured ? 'text-gray-400' : 'text-gray-500', 'text-base')}>/user/month</span>
               </p>
               <p className={classNames(tier.featured ? 'text-gray-300' : 'text-gray-600', 'mt-6 text-base leading-7')}>
                 {tier.description}
@@ -423,11 +424,7 @@ export default function LandingPage() {
                 ))}
               </ul>
               <div className='mt-8 flex justify-center'>
-                <stripe-buy-button
-                  buy-button-id={tier.stripeId}
-                  publishable-key={tier.publishableKey}
-                >
-                </stripe-buy-button>
+                <GetStartedButton />
               </div>
             </div>
           ))}
