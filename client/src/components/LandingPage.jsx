@@ -12,8 +12,10 @@ import {
 import { CheckIcon } from '@heroicons/react/20/solid'
 import screenshot from '../assets/product-screenshot.png'
 import logo from '../assets/Logo-main.svg'
-
 import { useAuth0 } from '@auth0/auth0-react'
+
+import LoginButton from './LoginButton'
+import SignUpButton from './SignUpButton'
 
 const navigation = [
   { name: 'Features', href: '#appFeatures' },
@@ -153,17 +155,9 @@ export default function LandingPage() {
             ))}
           </div>
           <div className="hidden lg:flex lg:flex-1 lg:justify-end align-middle gap-x-6">
-            <button
-              onClick={() => loginWithRedirect()}
-              type="button"
-              className="rounded-md bg-cyan-50 px-3 py-2 text-sm font-semibold text-cyan-700 shadow-sm hover:bg-cyan-100"
-            >
-              Sign Up
-            </button>
+            <SignUpButton />
             <div className='flex items-center'>
-              <a href="#" onClick={() => loginWithRedirect()} className="text-sm font-semibold px-3 py-2 leading-6 text-gray-900 align-middle">
-                Log in <span aria-hidden="true">&rarr;</span>
-              </a>
+              <LoginButton />
             </div>
           </div>
         </nav>
@@ -202,20 +196,8 @@ export default function LandingPage() {
                   ))}
                 </div>
                 <div className="flex flex-col py-6 gap-y-5">
-                  <a
-                    href="#"
-                    onClick={() => loginWithRedirect()}
-                    className="-mx-3 block rounded-lg px-3 py-2.5 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50"
-                  >
-                    Log in
-                  </a>
-                  <button
-                    type="button"
-                    onClick={() => loginWithRedirect()}
-                    className="rounded-md bg-cyan-50 px-3 py-2 text-sm font-semibold text-cyan-700 shadow-sm hover:bg-cyan-100"
-                  >
-                    Sign Up
-                  </button>
+                  <LoginButton />
+                  <SignUpButton />
                 </div>
               </div>
             </div>
@@ -299,13 +281,7 @@ export default function LandingPage() {
                   amet fugiat veniam occaecat fugiat aliqua.
                 </p>
                 <div className="mt-10 flex items-center justify-center">
-                  <a
-                    href="#"
-                    onClick={() => setOpen(true)}
-                    className="rounded-md bg-cyan-600 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-cyan-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-cyan-600"
-                  >
-                    Sign Up
-                  </a>
+                  <SignUpButton />
                 </div>
               </div>
               <div className="mt-16 flow-root sm:mt-24">
