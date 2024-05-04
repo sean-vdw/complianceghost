@@ -155,11 +155,9 @@ export default function LandingPage() {
               </a>
             ))}
           </div>
-          <div className="hidden lg:flex lg:flex-1 lg:justify-end align-middle gap-x-6">
+          <div className="hidden lg:flex lg:flex-1 lg:justify-end items-center align-middle gap-x-6">
             <SignUpButton />
-            <div className='flex items-center'>
-              <LoginButton />
-            </div>
+            <LoginButton />
           </div>
         </nav>
         <Dialog as="div" className="lg:hidden" open={mobileMenuOpen} onClose={setMobileMenuOpen}>
@@ -275,11 +273,10 @@ export default function LandingPage() {
             <div className="mx-auto max-w-7xl px-6 lg:px-8">
               <div className="mx-auto max-w-2xl text-center">
                 <h1 className="text-4xl font-bold tracking-tight text-gray-900 sm:text-6xl">
-                  Compliance review of marketing content in <br /><span className='line-through'>55 minutes</span> <span className='text-teal-700'>4 seconds</span>.
+                  Compliance review of marketing content in <br /><span className='line-through'>45 minutes</span> <span className='text-teal-700'>4 seconds</span>.
                 </h1>
                 <p className="mt-6 text-lg leading-8 text-gray-600">
-                  Anim aute id magna aliqua ad ad non deserunt sunt. Qui irure qui lorem cupidatat commodo. Elit sunt
-                  amet fugiat veniam occaecat fugiat aliqua.
+                  The end-to-end compliance hub for RIA and asset manager marketing content. Automate reviews, language suggestions, disclaimers, and archiving. 
                 </p>
                 <div className="mt-10 flex items-center justify-center">
                   <SignUpButton />
@@ -316,13 +313,12 @@ export default function LandingPage() {
       {/* Feature section */}
       <div id='appFeatures' className="mx-auto mt-32 max-w-7xl px-6 sm:mt-56 lg:px-8">
         <div className="mx-auto max-w-2xl lg:text-center">
-          <h2 className="text-base font-semibold leading-7 text-cyan-600">Deploy faster</h2>
+          <h2 className="text-base font-semibold leading-7 text-cyan-600">Busy work, automated away.</h2>
           <p className="mt-2 text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">
-            Everything you need to deploy your app
+            Your compliance virtual assistant
           </p>
           <p className="mt-6 text-lg leading-8 text-gray-600">
-            Quis tellus eget adipiscing convallis sit sit eget aliquet quis. Suspendisse eget egestas a elementum
-            pulvinar et feugiat blandit at. In mi viverra elit nunc.
+            A faster and more detailed set of eyes and ears for the busy work you hate doing.
           </p>
         </div>
         <div className="mx-auto mt-16 max-w-2xl sm:mt-20 lg:mt-24 lg:max-w-4xl">
@@ -423,7 +419,7 @@ export default function LandingPage() {
                   </li>
                 ))}
               </ul>
-              <div className='mt-8 flex justify-center'>
+              <div className='mt-8 flex justify-center items-center'>
                 <GetStartedButton />
               </div>
             </div>

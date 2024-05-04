@@ -17,7 +17,7 @@ function UserRoutes() {
   const { isAuthenticated } = useAuth0();
 
   if (!isAuthenticated) {
-    window.location.href = 'https://dev-haebwa8jada12quw.us.auth0.com/u/login';
+    window.location.href = 'https://zipreview.io/';
     return null;
   }
 
